@@ -1,0 +1,19 @@
+.ppCell {
+  border : 1px solid black ;
+  width: 25px;
+  height: 25px;
+}
+
+.ppRow {
+  display: inline-block;
+}
+
+.ppSwatchCell {
+  border : 1px solid black ;
+  width: 15px;
+  height: 15px;
+}
+
+.ppSwatchRow {
+  display: inline-block;
+}
