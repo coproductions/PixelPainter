@@ -7,6 +7,24 @@ pixelPaintRunner.buildSwatch(['green','red','blue','black','white','yellow','gre
 
 var pixelPainter = function(){
   var pixelPainterEl = document.getElementById('pixelPainter');
+  var selectedColor = null;
+
+  var fillColor = function(){
+    this.style.backgroundColor = selectedColor;
+  };
+
+  var pickColor = function(){
+    selectedColor = this.style.backgroundColor;
+    console.log('selcolcor',selectedColor)
+
+    var ppGridCells = document.getElementsByClassName('ppCell');
+
+    // event listener for filling colors
+    Array.prototype.forEach.call(ppGridCells,function(val){
+      val.addEventListener('click',fillColor)
+      });
+  };
+
 
   // generates the pp swatch
   var swatchGenerator = function(colorArray){
@@ -36,6 +54,12 @@ var pixelPainter = function(){
       nrOfRows --;
     }
     pixelPainterEl.appendChild(ppSwatch);
+    var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
+
+    // event listener for picking colors
+    Array.prototype.forEach.call(ppSwatchCells,function(val){
+      val.addEventListener('click',pickColor)
+      });
   };
 
   // generates the pp grid
@@ -69,7 +93,7 @@ var pixelPainter = function(){
     pixelPainterEl.appendChild(ppCanvas);
   };
 
-  document.getElementsByClassName('ppSwatchCell').addEventListener()
+
 
   return {
     buildGrid : gridGenerator,
