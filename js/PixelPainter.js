@@ -29,7 +29,6 @@ var pixelPainter = function(){
   };
 
   var fillColorHover = function(){
-    console.log('hovering')
       this.style.backgroundColor = selectedColor;
   };
 
@@ -74,9 +73,7 @@ var pixelPainter = function(){
       ppSwatch.appendChild(rowEl);
       nrOfRows --;
     }
-
     pixelPainterEl.appendChild(ppSwatch);
-
 
     // event listener for picking colors
     Array.prototype.forEach.call(ppSwatchCells,function(val){
