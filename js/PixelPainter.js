@@ -1,7 +1,7 @@
 window.onload = function(){
 var pixelPaintRunner = pixelPainter();
 pixelPaintRunner.buildGrid(105,105);
-pixelPaintRunner.buildSwatch(['green','yellow','red','blue','red','red','red'])
+pixelPaintRunner.buildSwatch(['green','pink','orange','gray','black','white','brown','yellow','red','blue','red','red','red'])
 };
 
 
@@ -10,6 +10,7 @@ var pixelPainter = function(){
   var selectedColor = null;
   var ppGridCells = document.getElementsByClassName('ppCell');
   var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
+  var gridSize = null;
 
   var clearButton = document.getElementById('clearAll');
   clearButton.addEventListener('click',clearCanvas);
@@ -101,7 +102,11 @@ var pixelPainter = function(){
           cellCounter ++;
           var gridCellEl = document.createElement('div');
           gridCellEl.id = 'ppCell'+cellCounter;
-          gridCellEl.className = 'ppCell'
+          gridCellEl.className = 'ppCell';
+          if(gridSize){
+            gridCellEl.style.width = gridSize;
+            gridCellEl.style.heigth = gridSize;
+          }
           rowEl.appendChild(gridCellEl);
           columnCounter ++;
         }
@@ -125,9 +130,15 @@ var pixelPainter = function(){
       val.addEventListener('mouseup',mouseup)})
   };
 
+  var buildFromObject = function(object){
+    buildGrid(object.width,object.height);
+    buildSwatch(object.colorSwatch);
+  };
+
   // the module to be returned
   return {
     buildGrid : gridGenerator,
-    buildSwatch : swatchGenerator
+    buildSwatch : swatchGenerator,
+    buildFromObject : buildFromObject
   };
 };
