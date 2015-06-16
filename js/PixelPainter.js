@@ -8,7 +8,6 @@ pixelPaintRunner.buildSwatch(['#FF0000','#800080','#00FF00','#FF0000','#800080',
 var pixelPainter = function(){
   var pixelPainterEl = document.getElementById('pixelPainter');
   var selectedColor = null;
-  var mouseIsDown = false;
   var ppGridCells = document.getElementsByClassName('ppCell');
 
   var clearButton = document.getElementById('clearAll');
@@ -31,9 +30,7 @@ var pixelPainter = function(){
 
   var fillColorHover = function(){
     console.log('hovering')
-    if(mouseIsDown){
       this.style.backgroundColor = selectedColor;
-    }
   };
 
   var pickColor = function(){
@@ -41,13 +38,11 @@ var pixelPainter = function(){
   };
 
   var mousedown = function(){
-    mouseIsDown = true;
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.addEventListener('mouseover',fillColorHover)})
   };
 
   var mouseup = function(){
-    mouseIsDown = false;
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.removeEventListener('mouseover',fillColorHover)})
   }
