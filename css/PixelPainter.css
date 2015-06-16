@@ -2,6 +2,7 @@
   border : 1px solid gray ;
   width: 5px;
   height: 5px;
+  display: inline-block;
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
@@ -9,15 +10,16 @@
 }
 
 .ppRow {
-  display: inline-block;
+
 }
 
 .ppSwatchCell {
   border : 1px solid black ;
   width: 15px;
   height: 15px;
+  display: inline-block;
 }
 
 .ppSwatchRow {
-  display: inline-block;
+
 }

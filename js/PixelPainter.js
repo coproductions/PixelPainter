@@ -1,7 +1,7 @@
 window.onload = function(){
 var pixelPaintRunner = pixelPainter();
 pixelPaintRunner.buildGrid(105,105);
-pixelPaintRunner.buildSwatch(['#FF0000','#800080','#00FF00','#FF0000','#800080','#00FF00','#00FFFF','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink'])
+pixelPaintRunner.buildSwatch(['green','yellow','red','blue','red','red','red'])
 };
 
 
@@ -52,6 +52,7 @@ var pixelPainter = function(){
     ppSwatch.id = 'ppSwatch'
     var totalColors = colorArray.length;
     var nrOfRows = Math.ceil(totalColors/6);
+    console.log(nrOfRows)
     var colorIndex = 0;
 
     //generating swatch rows
