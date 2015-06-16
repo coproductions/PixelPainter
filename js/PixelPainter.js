@@ -12,6 +12,7 @@ var pixelPainter = function(){
   var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
   var gridSize = null;
   var undoArray = [];
+  var undoHistoryArray = [];
 
 
   var clearButton = document.getElementById('clearAll');
@@ -31,13 +32,21 @@ var pixelPainter = function(){
   };
 
   function undoLastStep(){
+    if(undoArray.length === 0 && undoHistoryArray.length > 0){
+      undoArray = undoHistoryArray.pop();
+    }
+    console.log(undoArray)
     undoArray.forEach(function(val){
       document.getElementById(val).style.backgroundColor = 'transparent';
     })
+    undoArray = [];
   }
 
   var fillColorClick = function(){
-    undoArray = [];
+    if(undoArray.length > 0){
+      undoHistoryArray.push(undoArray);
+      undoArray = [];
+    }
     this.style.backgroundColor = selectedColor;
     undoArray.push(this.id);
   };
@@ -45,6 +54,7 @@ var pixelPainter = function(){
   var fillColorHover = function(){
       this.style.backgroundColor = selectedColor;
       undoArray.push(this.id);
+      console.log(undoArray)
   };
 
   var pickColor = function(){
@@ -52,7 +62,10 @@ var pixelPainter = function(){
   };
 
   var mousedown = function(){
-    undoArray = [];
+      if(undoArray.length > 0){
+      undoHistoryArray.push(undoArray);
+      undoArray = [];
+    }
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.addEventListener('mouseover',fillColorHover)})
   };
