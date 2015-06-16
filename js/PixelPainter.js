@@ -16,18 +16,15 @@ var pixelPainter = function(){
   clearButton.addEventListener('click',clearCanvas);
 
   var eraseButton = document.getElementById('erasor');
-  eraseButton.addEventListener('click',erasor);
+  eraseButton.addEventListener('click',function(){
+     selectedColor = 'transparent';
+    });
 
 
   function clearCanvas(){
     Array.prototype.forEach.call(ppGridCells,function(val){
       val.style.backgroundColor = 'transparent';
       });
-  }
-
-  function erasor(){
-    console.log('erasing')
-    selectedColor = 'transparent';
   }
 
   var fillColorClick = function(){
@@ -46,11 +43,10 @@ var pixelPainter = function(){
 
   var mousedown = function(){
     mouseIsDown = true;
-    console.log('mousedown',mouseIsDown)
-     if(mouseIsDown){
+    if(mouseIsDown){
       Array.prototype.forEach.call(ppGridCells,function(val){
       val.addEventListener('mouseover',fillColorHover)})
-    this.style.backgroundColor = selectedColor;
+      this.style.backgroundColor = selectedColor;
     }
   };
 
@@ -96,8 +92,6 @@ var pixelPainter = function(){
     ppCanvas.id = 'ppCanvas';
     var cellCounter = 0;
     var rowCounter = 1;
-    // var gridEl = document.createElement('div');
-    // gridEl.id = 'ppGrid';
 
       //generating row elements
     while (rowCounter <= y){
@@ -116,7 +110,7 @@ var pixelPainter = function(){
           columnCounter ++;
         }
         ppCanvas.appendChild(rowEl);
-       rowCounter ++;
+        rowCounter ++;
     }
     pixelPainterEl.appendChild(ppCanvas);
 
