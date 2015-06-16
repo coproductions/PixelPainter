@@ -1,7 +1,7 @@
 window.onload = function(){
 var pixelPaintRunner = pixelPainter();
-pixelPaintRunner.buildGrid(20,20);
-pixelPaintRunner.buildSwatch(['green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink'])
+pixelPaintRunner.buildGrid(35,50);
+pixelPaintRunner.buildSwatch(['#FF0000','#800080','#00FF00','#FF0000','#800080','#00FF00','#00FFFF','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink'])
 };
 
 
