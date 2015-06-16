@@ -17,7 +17,7 @@ var pixelPainter = function(){
   var eraseButton = document.getElementById('erasor');
   eraseButton.addEventListener('click',function(){
      selectedColor = 'transparent';
-    });
+  });
 
   function clearCanvas(){
     Array.prototype.forEach.call(ppGridCells,function(val){
@@ -30,6 +30,7 @@ var pixelPainter = function(){
   };
 
   var fillColorHover = function(){
+    console.log('hovering')
     if(mouseIsDown){
       this.style.backgroundColor = selectedColor;
     }
@@ -41,9 +42,15 @@ var pixelPainter = function(){
 
   var mousedown = function(){
     mouseIsDown = true;
-      Array.prototype.forEach.call(ppGridCells,function(val){
-      val.addEventListener('mouseover',fillColorHover)})
+    Array.prototype.forEach.call(ppGridCells,function(val){
+    val.addEventListener('mouseover',fillColorHover)})
   };
+
+  var mouseup = function(){
+    mouseIsDown = false;
+    Array.prototype.forEach.call(ppGridCells,function(val){
+    val.removeEventListener('mouseover',fillColorHover)})
+  }
 
   // generates the pp swatch
   var swatchGenerator = function(colorArray){
@@ -121,9 +128,7 @@ var pixelPainter = function(){
 
     //event listener to cancel mousedown
     Array.prototype.forEach.call(ppGridCells,function(val){
-      val.addEventListener('mouseup',function(){
-        mouseIsDown = false;
-      })})
+      val.addEventListener('mouseup',mouseup)})
   };
 
   // the module to be returned
