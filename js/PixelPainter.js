@@ -20,7 +20,6 @@ var pixelPainter = function(){
 
 
   function clearCanvas(){
-    console.log('clearing')
     Array.prototype.forEach.call(ppGridCells,function(val){
       val.style.backgroundColor = 'transparent';
       });
@@ -54,7 +53,6 @@ var pixelPainter = function(){
     this.style.backgroundColor = selectedColor;
     }
   };
-
 
   // generates the pp swatch
   var swatchGenerator = function(colorArray){
