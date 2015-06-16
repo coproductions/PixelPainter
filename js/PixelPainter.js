@@ -1,6 +1,6 @@
 window.onload = function(){
 var pixelPaintRunner = pixelPainter();
-pixelPaintRunner.buildGrid(5,5);
+pixelPaintRunner.buildGrid(20,20);
 pixelPaintRunner.buildSwatch(['green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink'])
 };
 
@@ -8,21 +8,51 @@ pixelPaintRunner.buildSwatch(['green','red','blue','black','white','yellow','gre
 var pixelPainter = function(){
   var pixelPainterEl = document.getElementById('pixelPainter');
   var selectedColor = null;
+  var hover = false;
+  var mouseIsDown = false;
+  var ppGridCells = document.getElementsByClassName('ppCell');
 
-  var fillColor = function(){
+  var clearButton = document.getElementById('clearAll');
+  clearButton.addEventListener('click',clearCanvas);
+
+  var eraseButton = document.getElementById('erasor');
+  eraseButton.addEventListener('click',erasor);
+
+
+  function clearCanvas(){
+    console.log('clearing')
+    Array.prototype.forEach.call(ppGridCells,function(val){
+      val.style.backgroundColor = 'transparent';
+      });
+  }
+
+  function erasor(){
+    console.log('erasing')
+    selectedColor = 'transparent';
+  }
+
+  var fillColorClick = function(){
     this.style.backgroundColor = selectedColor;
+  };
+
+  var fillColorHover = function(){
+    if(mouseIsDown){
+      this.style.backgroundColor = selectedColor;
+    }
   };
 
   var pickColor = function(){
     selectedColor = this.style.backgroundColor;
-    console.log('selcolcor',selectedColor)
+  };
 
-    var ppGridCells = document.getElementsByClassName('ppCell');
-
-    // event listener for filling colors
-    Array.prototype.forEach.call(ppGridCells,function(val){
-      val.addEventListener('click',fillColor)
-      });
+  var mousedown = function(){
+    mouseIsDown = true;
+    console.log('mousedown',mouseIsDown)
+     if(mouseIsDown){
+      Array.prototype.forEach.call(ppGridCells,function(val){
+      val.addEventListener('mouseover',fillColorHover)})
+    this.style.backgroundColor = selectedColor;
+    }
   };
 
 
@@ -91,8 +121,23 @@ var pixelPainter = function(){
        rowCounter ++;
     }
     pixelPainterEl.appendChild(ppCanvas);
-  };
 
+    //event listener to fill colors one click at a time
+    Array.prototype.forEach.call(ppGridCells,function(val){
+      val.addEventListener('click',fillColorClick)
+      });
+
+    // event listener for activating mouse down
+    Array.prototype.forEach.call(ppGridCells,function(val){
+      val.addEventListener('mousedown',mousedown)
+      });
+
+    //event listener to cancel mousedown
+    Array.prototype.forEach.call(ppGridCells,function(val){
+      val.addEventListener('mouseup',function(){
+        mouseIsDown = false;
+      })})
+  };
 
 
   return {
