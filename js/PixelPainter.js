@@ -9,6 +9,7 @@ var pixelPainter = function(){
   var pixelPainterEl = document.getElementById('pixelPainter');
   var selectedColor = null;
   var ppGridCells = document.getElementsByClassName('ppCell');
+  var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
 
   var clearButton = document.getElementById('clearAll');
   clearButton.addEventListener('click',clearCanvas);
@@ -20,8 +21,7 @@ var pixelPainter = function(){
 
   function clearCanvas(){
     Array.prototype.forEach.call(ppGridCells,function(val){
-      val.style.backgroundColor = 'transparent';
-      });
+    val.style.backgroundColor = 'transparent'; });
   };
 
   var fillColorClick = function(){
@@ -45,7 +45,7 @@ var pixelPainter = function(){
   var mouseup = function(){
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.removeEventListener('mouseover',fillColorHover)})
-  }
+  };
 
   // generates the pp swatch
   var swatchGenerator = function(colorArray){
@@ -74,8 +74,9 @@ var pixelPainter = function(){
       ppSwatch.appendChild(rowEl);
       nrOfRows --;
     }
+
     pixelPainterEl.appendChild(ppSwatch);
-    var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
+
 
     // event listener for picking colors
     Array.prototype.forEach.call(ppSwatchCells,function(val){
