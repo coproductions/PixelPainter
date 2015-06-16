@@ -1,6 +1,6 @@
 window.onload = function(){
 var pixelPaintRunner = pixelPainter();
-pixelPaintRunner.buildGrid(105,105);
+pixelPaintRunner.buildGrid(15,15);
 pixelPaintRunner.buildSwatch(['green','pink','orange','gray','black','white','brown','yellow','red','blue','red','red','red'])
 };
 
@@ -11,6 +11,8 @@ var pixelPainter = function(){
   var ppGridCells = document.getElementsByClassName('ppCell');
   var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
   var gridSize = null;
+  var undoArray = [];
+
 
   var clearButton = document.getElementById('clearAll');
   clearButton.addEventListener('click',clearCanvas);
@@ -20,17 +22,29 @@ var pixelPainter = function(){
      selectedColor = 'transparent';
   });
 
+  var undoButton = document.getElementById('undo');
+  undoButton.addEventListener('click',undoLastStep);
+
   function clearCanvas(){
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.style.backgroundColor = 'transparent'; });
   };
 
+  function undoLastStep(){
+    undoArray.forEach(function(val){
+      document.getElementById(val).style.backgroundColor = 'transparent';
+    })
+  }
+
   var fillColorClick = function(){
+    undoArray = [];
     this.style.backgroundColor = selectedColor;
+    undoArray.push(this.id);
   };
 
   var fillColorHover = function(){
       this.style.backgroundColor = selectedColor;
+      undoArray.push(this.id);
   };
 
   var pickColor = function(){
@@ -38,6 +52,7 @@ var pixelPainter = function(){
   };
 
   var mousedown = function(){
+    undoArray = [];
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.addEventListener('mouseover',fillColorHover)})
   };
