@@ -1,7 +1,7 @@
 .ppCell {
-  border : 1px solid black ;
-  width: 15px;
-  height: 15px;
+  border : 1px solid gray ;
+  width: 5px;
+  height: 5px;
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;

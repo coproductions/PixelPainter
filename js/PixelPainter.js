@@ -1,6 +1,6 @@
 window.onload = function(){
 var pixelPaintRunner = pixelPainter();
-pixelPaintRunner.buildGrid(35,50);
+pixelPaintRunner.buildGrid(105,105);
 pixelPaintRunner.buildSwatch(['#FF0000','#800080','#00FF00','#FF0000','#800080','#00FF00','#00FFFF','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink','green','red','blue','black','white','yellow','grey','pink'])
 };
 
@@ -8,7 +8,6 @@ pixelPaintRunner.buildSwatch(['#FF0000','#800080','#00FF00','#FF0000','#800080',
 var pixelPainter = function(){
   var pixelPainterEl = document.getElementById('pixelPainter');
   var selectedColor = null;
-  var hover = false;
   var mouseIsDown = false;
   var ppGridCells = document.getElementsByClassName('ppCell');
 
@@ -20,12 +19,11 @@ var pixelPainter = function(){
      selectedColor = 'transparent';
     });
 
-
   function clearCanvas(){
     Array.prototype.forEach.call(ppGridCells,function(val){
       val.style.backgroundColor = 'transparent';
       });
-  }
+  };
 
   var fillColorClick = function(){
     this.style.backgroundColor = selectedColor;
@@ -43,11 +41,8 @@ var pixelPainter = function(){
 
   var mousedown = function(){
     mouseIsDown = true;
-    if(mouseIsDown){
       Array.prototype.forEach.call(ppGridCells,function(val){
       val.addEventListener('mouseover',fillColorHover)})
-      this.style.backgroundColor = selectedColor;
-    }
   };
 
   // generates the pp swatch
@@ -131,11 +126,9 @@ var pixelPainter = function(){
       })})
   };
 
-
+  // the module to be returned
   return {
     buildGrid : gridGenerator,
     buildSwatch : swatchGenerator
-
   };
-
 };
