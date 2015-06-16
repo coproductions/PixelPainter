@@ -131,8 +131,10 @@ var pixelPainter = function(){
   };
 
   var buildFromObject = function(object){
+    gridSize = object.gridSize;
     buildGrid(object.width,object.height);
     buildSwatch(object.colorSwatch);
+
   };
 
   // the module to be returned
