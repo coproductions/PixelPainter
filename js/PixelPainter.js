@@ -1,7 +1,7 @@
 window.onload = function(){
 var pixelPaintRunner = pixelPainter();
+pixelPaintRunner.buildSwatch(pixelPaintRunner.randomColorGenerator(36));
 pixelPaintRunner.buildGrid(15,15);
-pixelPaintRunner.buildSwatch(['green','pink','orange','gray','black','white','brown','yellow','red','blue','red','red','red'])
 };
 
 
@@ -15,29 +15,40 @@ var pixelPainter = function(){
   var undoHistoryArray = [];
 
 
-  var clearButton = document.getElementById('clearAll');
+  var clearButton = document.createElement('button');
+  clearButton.innerHTML = 'start over';
+  clearButton.id = 'clearAll';
   clearButton.addEventListener('click',clearCanvas);
 
-  var eraseButton = document.getElementById('erasor');
-  eraseButton.addEventListener('click',function(){
-     selectedColor = 'transparent';
-  });
+  var eraseButton = document.createElement('button');
+  eraseButton.innerHTML = 'erasor';
+  eraseButton.id = 'erasor';
+  eraseButton.addEventListener('click',erase);
 
-  var undoButton = document.getElementById('undo');
+  var undoButton = document.createElement('button');
+  undoButton.innerHTML = 'undo';
+  undoButton.id = 'undo';
   undoButton.addEventListener('click',undoLastStep);
 
   function clearCanvas(){
     Array.prototype.forEach.call(ppGridCells,function(val){
-    val.style.backgroundColor = 'transparent'; });
+    val.style.backgroundColor = 'white';
+    undoArray = [];
+    ndoHistoryArray = [];
+    selectedColor = null;
+     });
   };
+
+  function erase(){
+    selectedColor = 'white';
+  }
 
   function undoLastStep(){
     if(undoArray.length === 0 && undoHistoryArray.length > 0){
       undoArray = undoHistoryArray.pop();
     }
-    console.log(undoArray)
     undoArray.forEach(function(val){
-      document.getElementById(val).style.backgroundColor = 'transparent';
+      document.getElementById(val[0]).style.backgroundColor = val[1];
     })
     undoArray = [];
   }
@@ -47,14 +58,15 @@ var pixelPainter = function(){
       undoHistoryArray.push(undoArray);
       undoArray = [];
     }
+    undoArray.push([this.id,this.style.backgroundColor]);
     this.style.backgroundColor = selectedColor;
-    undoArray.push(this.id);
+
   };
 
   var fillColorHover = function(){
+    undoArray.push([this.id,this.style.backgroundColor]);
       this.style.backgroundColor = selectedColor;
-      undoArray.push(this.id);
-      console.log(undoArray)
+
   };
 
   var pickColor = function(){
@@ -75,14 +87,30 @@ var pixelPainter = function(){
     val.removeEventListener('mouseover',fillColorHover)})
   };
 
+  var randomColorGenerator = function(n){
+    if(n>100){
+      throw('cannot generate more than 100 colors')
+    }
+    var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+    var randomColorArray = [];
+    while(n > 0){
+      var randomNr = Math.floor(Math.random()*147);
+      if(randomColorArray.indexOf(CSS_COLOR_NAMES[randomNr]) < 0 ){
+      randomColorArray.push(CSS_COLOR_NAMES[randomNr])
+        n --;
+      }
+    }
+    return randomColorArray;
+  };
+
   // generates the pp swatch
   var swatchGenerator = function(colorArray){
     var ppSwatch = document.createElement('div');
     ppSwatch.id = 'ppSwatch'
     var totalColors = colorArray.length;
     var nrOfRows = Math.ceil(totalColors/6);
-    console.log(nrOfRows)
     var colorIndex = 0;
+    ppSwatch.appendChild(clearButton);
 
     //generating swatch rows
     while(nrOfRows > 0){
@@ -91,7 +119,7 @@ var pixelPainter = function(){
       var columnCounter = 1;
 
       //generating swatch cells
-      while(columnCounter < 6 && colorIndex < totalColors){
+      while(columnCounter <= 6 && colorIndex < totalColors){
         var swatchCellEl = document.createElement('div');
         swatchCellEl.id = 'ppSwatchCell'+colorIndex;
         swatchCellEl.className = 'ppSwatchCell'
@@ -103,6 +131,10 @@ var pixelPainter = function(){
       ppSwatch.appendChild(rowEl);
       nrOfRows --;
     }
+
+    ppSwatch.appendChild(undoButton);
+    ppSwatch.appendChild(eraseButton);
+
     pixelPainterEl.appendChild(ppSwatch);
 
     // event listener for picking colors
@@ -169,6 +201,7 @@ var pixelPainter = function(){
   return {
     buildGrid : gridGenerator,
     buildSwatch : swatchGenerator,
-    buildFromObject : buildFromObject
+    buildFromObject : buildFromObject,
+    randomColorGenerator : randomColorGenerator
   };
 };

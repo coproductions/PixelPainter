@@ -1,7 +1,12 @@
+
+
 .ppCell {
-  border : 1px solid gray ;
-  width: 5px;
-  height: 5px;
+  background-color: white;
+  border : 1px solid black ;
+  width: 40px;
+  height: 40px;
+
+
   display: inline-block;
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -14,12 +19,57 @@
 }
 
 .ppSwatchCell {
-  border : 1px solid black ;
-  width: 15px;
-  height: 15px;
+  border : 3px solid  transparent;
+  width: 20px;
+  height: 20px;
   display: inline-block;
+}
+
+.ppSwatchCell:hover{
+  border : 3px solid black ;
 }
 
 .ppSwatchRow {
 
+}
+
+#ppCanvas {
+
+  height: 680px;
+  padding: 50px 50px 50px 50px;
+  background-color: gray;
+  float : left;
+}
+
+#ppSwatch {
+  height: 640px;
+  width: 200px;
+  background-color: #260000;
+  padding: 90px 40px 50px 40px;
+  float : left;
+}
+
+#pixelPainter {
+  display: inline-block;
+}
+
+button {
+  float: left;
+  width: 150px;
+  height: 60px;
+  margin: 30px 10px 30px 30px;
+  padding: auto;
+  background-color: transparent;
+  border: 1px solid #94B84D;
+  font-size: 22px;
+  color:#94B84D;
+
+}
+
+button:hover {
+  color: orange;
+  background-color: transparent;
+  border: 3px solid orange;
+  font-size: 22px;
+  font-color: orange;
 }
