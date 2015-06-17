@@ -107,10 +107,22 @@ var pixelPainter = function(){
   var swatchGenerator = function(colorArray){
     var ppSwatch = document.createElement('div');
     ppSwatch.id = 'ppSwatch'
+    var ppSwatchArea = document.createElement('div');
+    ppSwatchArea.id = 'ppSwatchArea'
     var totalColors = colorArray.length;
     var nrOfRows = Math.ceil(totalColors/6);
     var colorIndex = 0;
-    ppSwatch.appendChild(clearButton);
+    var logo = document.createElement('div');
+    logo.id = 'logo';
+    var logoImage = document.createElement('div');
+    logoImage.id = 'logoImage';
+    var logoText = document.createElement('div');
+    logoText.id = 'logoText';
+    logoText.innerHTML = 'Pixel Painter'
+    logo.appendChild(logoImage);
+    logo.appendChild(logoText);
+    ppSwatchArea.appendChild(logo);
+    ppSwatchArea.appendChild(clearButton);
 
     //generating swatch rows
     while(nrOfRows > 0){
@@ -132,10 +144,11 @@ var pixelPainter = function(){
       nrOfRows --;
     }
 
-    ppSwatch.appendChild(undoButton);
-    ppSwatch.appendChild(eraseButton);
+    ppSwatchArea.appendChild(ppSwatch);
+    ppSwatchArea.appendChild(undoButton);
+    ppSwatchArea.appendChild(eraseButton);
 
-    pixelPainterEl.appendChild(ppSwatch);
+    pixelPainterEl.appendChild(ppSwatchArea);
 
     // event listener for picking colors
     Array.prototype.forEach.call(ppSwatchCells,function(val){

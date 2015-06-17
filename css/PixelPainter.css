@@ -41,7 +41,7 @@
   float : left;
 }
 
-#ppSwatch {
+#ppSwatchArea {
   height: 640px;
   width: 200px;
   background-color: #260000;
@@ -51,6 +51,13 @@
 
 #pixelPainter {
   display: inline-block;
+  font-family: 'Roboto', bold;
+}
+
+#ppSwatch{
+   float: left;
+margin: 30px 10px 30px 30px;
+
 }
 
 button {
@@ -72,4 +79,34 @@ button:hover {
   border: 3px solid orange;
   font-size: 22px;
   font-color: orange;
+}
+
+#erasor {
+  margin-top: 0px;
+}
+
+#logo){
+  float: left;
+  margin: 30px 30px 30px 30px;
+  display: inline-block;
+  width : 100px;
+}
+
+#logoText{
+  font-family: 'Roboto', bold;
+   display: inline-block;
+  font-color: orange;
+  color : orange;
+  font-size: 32px;
+}
+
+#logoImage {
+  display: inline-block;
+  width : 17px;
+  height: 17px;
+  background-image: url('../assets/logo.svg');
+}
+
+#undo{
+  /*background-image: url('../assets/undo.svg');*/
 }
