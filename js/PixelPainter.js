@@ -82,6 +82,7 @@ var pixelPainter = function(){
   var fillColorHover = function(){
     undoArray.push([this.id,this.style.backgroundColor]);
       this.style.backgroundColor = selectedColor;
+      console.log('undo array',undoArray)
 
   };
 
@@ -220,9 +221,10 @@ var pixelPainter = function(){
       });
 
     //event listener to cancel mousedown
-    Array.prototype.forEach.call(ppGridCells,function(val){
-      val.addEventListener('mouseup',mouseup)})
+    ppCanvas.addEventListener('mouseup',mouseup)
   };
+
+
 
   var buildFromObject = function(object){
     gridSize = object.gridSize;
