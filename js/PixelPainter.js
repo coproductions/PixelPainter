@@ -20,15 +20,26 @@ var pixelPainter = function(){
   clearButton.id = 'clearAll';
   clearButton.addEventListener('click',clearCanvas);
 
+  var eraseImage = document.createElement('img');
+  eraseImage.id = 'eraseImage';
+  eraseImage.src = '../assets/red-slash.svg';
+
+
   var eraseButton = document.createElement('button');
-  eraseButton.innerHTML = 'erasor';
+  //eraseButton.innerHTML = 'erasor';
   eraseButton.id = 'erasor';
+  eraseButton.appendChild(eraseImage);
   eraseButton.addEventListener('click',erase);
 
   var undoButton = document.createElement('button');
   undoButton.innerHTML = 'undo';
   undoButton.id = 'undo';
   undoButton.addEventListener('click',undoLastStep);
+
+  var undoImage = document.createElement('img');
+  undoImage.src = '../assets/undo.svg';
+  undoImage.id = 'undoImage';
+  undoButton.appendChild(undoImage);
 
   function clearCanvas(){
     Array.prototype.forEach.call(ppGridCells,function(val){
