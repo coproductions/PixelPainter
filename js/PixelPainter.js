@@ -43,6 +43,9 @@ var pixelPainter = function(){
   undoButton.appendChild(undoImage);
 
   function clearCanvas(){
+     if(selectedColorElement){
+      selectedColorElement.className = 'ppSwatchCell';
+    }
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.style.backgroundColor = 'white';
     undoArray = [];
@@ -52,6 +55,9 @@ var pixelPainter = function(){
   };
 
   function erase(){
+    if(selectedColorElement){
+      selectedColorElement.className = 'ppSwatchCell';
+    }
     selectedColor = 'white';
   }
 
