@@ -224,7 +224,7 @@ var pixelPainter = function(){
       });
 
     //event listener to cancel mousedown
-    ppCanvas.addEventListener('mouseup',mouseup)
+    window.addEventListener('mouseup',mouseup)
   };
 
 

@@ -35,6 +35,7 @@
 #ppCanvas {
 
   height: 680px;
+  width : 680px;
   padding: 50px 50px 50px 50px;
   background-color: gray;
   float : left;
