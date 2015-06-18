@@ -11,7 +11,6 @@ var pixelPainter = function(){
   var ppGridCells = document.getElementsByClassName('ppCell');
   var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
   var gridSize = null;
-  var undoArray = [];
   var undoCache = {};
   var undoHistoryArray = [];
   var selectedColorElement;
