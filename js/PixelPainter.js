@@ -15,6 +15,15 @@ var pixelPainter = function(){
   var undoHistoryArray = [];
   var selectedColorElement;
 
+  var resolutionInput = document.createElement('input');
+  var resolutionRender = document.createElement('button');
+  resolutionRender.id = 'resolutionRenderButton';
+  resolutionRender.innerHTML = 'render'
+
+  var renderInstructions = document.createElement('div');
+  renderInstructions.id = 'renderInstructions';
+  renderInstructions.innerHTML = 'Enter a number to rerender the grid resolution (max 99).'
+
   var clearButton = document.createElement('button');
   clearButton.innerHTML = 'start over';
   clearButton.id = 'clearAll';
@@ -128,6 +137,25 @@ var pixelPainter = function(){
     return randomColorArray;
   };
 
+  var resolutionInputRender = function(){
+    if(typeof Number(resolutionInput.value) !== 'number' || Number(resolutionInput.value)<1 || Number(resolutionInput.value) > 99){
+      throw new TypeError('please enter a valid number between 1 and 99');
+    }
+    document.getElementById('ppCanvas').remove();
+    gridGenerator(Number(resolutionInput.value),Number(resolutionInput.value))
+    console.log(resolutionInput.value);
+    var cellSizeIncBorder = 650/resolutionInput.value;
+    var cellSizeExBorder = cellSizeIncBorder - 2;
+    console.log(cellSizeIncBorder)
+    console.log(cellSizeExBorder)
+
+    Array.prototype.forEach.call(document.getElementsByClassName('ppCell'),function(val){
+      val.style.width = cellSizeExBorder+'px';
+      val.style.height = cellSizeExBorder+'px';
+      });
+
+  }
+
   // generates the pp swatch
   var swatchGenerator = function(colorArray){
     var ppSwatch = document.createElement('div');
@@ -172,6 +200,10 @@ var pixelPainter = function(){
     ppSwatchArea.appendChild(ppSwatch);
     ppSwatchArea.appendChild(eraseButton);
     ppSwatchArea.appendChild(undoButton);
+    ppSwatchArea.appendChild(resolutionInput);
+    ppSwatchArea.appendChild(resolutionRender);
+    ppSwatchArea.appendChild(renderInstructions);
+
 
     pixelPainterEl.appendChild(ppSwatchArea);
 
@@ -179,6 +211,8 @@ var pixelPainter = function(){
     Array.prototype.forEach.call(ppSwatchCells,function(val){
       val.addEventListener('click',pickColor)
       });
+
+    resolutionRender.addEventListener('click',resolutionInputRender)
   };
 
   // generates the pp grid

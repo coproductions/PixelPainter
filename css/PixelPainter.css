@@ -14,6 +14,17 @@
   -o-user-select: none;
 }
 
+input{
+  margin: 30px 10px 10px 20px;
+  width: 40px;
+  float: left;
+  height: 40px;
+  font-size: 30px;
+}
+
+body{
+  font-family: 'Roboto', bold;
+}
 
 
 .ppSwatchCell {
@@ -147,4 +158,20 @@ button:hover {
   width: 20px;
   height: 20px;
   padding-left: 0px;
+}
+
+#resolutionRenderButton{
+  width: 100px;
+  float: right;
+  margin-left: 0px;
+  margin-bottom: 10px;
+}
+
+#renderInstructions{
+  text-align: left;
+  float: left;
+  width : 200px;
+  font-size: 15px;
+  color: #94B84D;
+  margin: 10px 20px 30px 20px;
 }
