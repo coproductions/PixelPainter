@@ -119,6 +119,7 @@ button:hover {
 }
 
 #undo{
+  padding: 5px 7px 5px 7px;
   float:right;
   margin-left: 0px;
   margin-top: 0px;
@@ -129,6 +130,17 @@ button:hover {
   text-align: right;
   height: 40px;
   width: 100px;
+}
+
+#undo:hover{
+  color: orange;
+  background-color: transparent;
+  border: 3px solid orange;
+  /*font-size: 22px;*/
+  font-color: orange;
+  padding: 3px 5px 3px 5px;
+
+
 }
 
 #undoImage{
