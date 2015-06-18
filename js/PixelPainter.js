@@ -12,6 +12,7 @@ var pixelPainter = function(){
   var ppSwatchCells = document.getElementsByClassName('ppSwatchCell')
   var gridSize = null;
   var undoArray = [];
+  var undoCache = {};
   var undoHistoryArray = [];
   var selectedColorElement;
 
@@ -60,27 +61,32 @@ var pixelPainter = function(){
   }
 
   function undoLastStep(){
-    if(undoArray.length === 0 && undoHistoryArray.length > 0){
-      undoArray = undoHistoryArray.pop();
+
+    if(Object.keys(undoCache).length ===0 && undoHistoryArray.length > 0){
+      undoCache = undoHistoryArray.pop();
     }
-    undoArray.forEach(function(val){
-      document.getElementById(val[0]).style.backgroundColor = val[1];
-    })
-    undoArray = [];
+    for(key in undoCache){
+      document.getElementById(key).style.backgroundColor = undoCache[key];
+    }
+    undoCache = {};
   }
 
   var fillColorClick = function(){
-    if(undoArray.length > 0){
-      undoHistoryArray.push(undoArray);
-      undoArray = [];
+    if(Object.keys(undoCache).length > 0){
+      undoHistoryArray.push(undoCache);
+      undoCache = {};
     }
-    undoArray.push([this.id,this.style.backgroundColor]);
+     if(!(this.id in undoCache)){
+    undoCache[this.id] = this.style.backgroundColor;
+    }
     this.style.backgroundColor = selectedColor;
 
   };
 
   var fillColorHover = function(){
-    undoArray.push([this.id,this.style.backgroundColor]);
+    if(!(this.id in undoCache)){
+      undoCache[this.id] = this.style.backgroundColor;
+    }
     this.style.backgroundColor = selectedColor;
   };
 
@@ -94,9 +100,9 @@ var pixelPainter = function(){
   };
 
   var mousedown = function(){
-      if(undoArray.length > 0){
-      undoHistoryArray.push(undoArray);
-      undoArray = [];
+      if(Object.keys(undoCache).length > 0){
+        undoHistoryArray.push(undoCache);
+        undoCache = {};
     }
     Array.prototype.forEach.call(ppGridCells,function(val){
     val.addEventListener('mouseover',fillColorHover)})
