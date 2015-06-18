@@ -56,19 +56,19 @@
 
 #ppSwatch{
    float: left;
-margin: 30px 10px 30px 30px;
+margin: 40px 20px 40px 20px;
 
 }
 
 button {
   float: left;
   width: 150px;
-  height: 60px;
-  margin: 30px 10px 30px 30px;
-  padding: auto;
+  height: 40px;
+  margin: 30px 20px 0px 20px;
+  /*padding: auto;*/
   background-color: transparent;
   border: 1px solid #94B84D;
-  font-size: 22px;
+  font-size: 20px;
   color:#94B84D;
 
 }
@@ -77,12 +77,15 @@ button:hover {
   color: orange;
   background-color: transparent;
   border: 3px solid orange;
-  font-size: 22px;
+  /*font-size: 22px;*/
   font-color: orange;
 }
 
 #erasor {
+  float: left;
+  display: inline-block;
   margin-top: 0px;
+  margin-right: 0px;
   background-color: white;
   width: 40px;
   height: 40px;
@@ -105,13 +108,19 @@ button:hover {
 
 #logoImage {
   display: inline-block;
-  width : 17px;
-  height: 17px;
+  width : 15px;
+  height: 15px;
   background-image: url('../assets/logo.svg');
 }
 
 #undo{
-  /*background-image: url('../assets/undo.svg');*/*/
+  float:right;
+  margin-left: 0px;
+  margin-top: 0px;
+  display: inline-block;
+/*  background-image: url('../assets/undo.svg');
+  background-size: 25px;
+  background-repeat: no-repeat;*/
   text-align: right;
   height: 40px;
   width: 100px;
@@ -119,6 +128,6 @@ button:hover {
 
 #undoImage{
   float : left;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 }
