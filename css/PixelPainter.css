@@ -29,6 +29,10 @@
   border : 3px solid black ;
 }
 
+.selectedColorElement{
+  border: 3px solid black;
+}
+
 .ppSwatchRow {
 
 }

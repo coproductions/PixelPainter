@@ -13,7 +13,8 @@ var pixelPainter = function(){
   var gridSize = null;
   var undoArray = [];
   var undoHistoryArray = [];
-
+  var selectedColorElement;
+  // selectedColorElement.id = 'selectedColorElement';
 
   var clearButton = document.createElement('button');
   clearButton.innerHTML = 'start over';
@@ -81,7 +82,12 @@ var pixelPainter = function(){
   };
 
   var pickColor = function(){
+    if(selectedColorElement){
+      selectedColorElement.className = 'ppSwatchCell';
+    }
     selectedColor = this.style.backgroundColor;
+    selectedColorElement = this;
+    selectedColorElement.className = 'ppSwatchCell selectedColorElement'
   };
 
   var mousedown = function(){
@@ -156,8 +162,8 @@ var pixelPainter = function(){
     }
 
     ppSwatchArea.appendChild(ppSwatch);
-    ppSwatchArea.appendChild(undoButton);
     ppSwatchArea.appendChild(eraseButton);
+    ppSwatchArea.appendChild(undoButton);
 
     pixelPainterEl.appendChild(ppSwatchArea);
 
