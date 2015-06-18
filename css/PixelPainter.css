@@ -14,9 +14,7 @@
   -o-user-select: none;
 }
 
-.ppRow {
 
-}
 
 .ppSwatchCell {
   border : 3px solid  transparent;
@@ -33,9 +31,6 @@
   border: 3px solid black;
 }
 
-.ppSwatchRow {
-
-}
 
 #ppCanvas {
 
@@ -66,7 +61,7 @@ margin: 40px 20px 40px 20px;
 
 button {
   float: left;
-  width: 150px;
+  width: 160px;
   height: 40px;
   margin: 30px 20px 0px 20px;
   /*padding: auto;*/
@@ -96,11 +91,11 @@ button:hover {
   height: 40px;
 }
 
-#logo){
+#logo{
   float: left;
-  margin: 30px 30px 30px 30px;
+  /*margin: 20px 20px 20px 20px;*/
   display: inline-block;
-  width : 100px;
+  width : 190px;
 }
 
 #logoText{
