@@ -81,9 +81,7 @@ var pixelPainter = function(){
 
   var fillColorHover = function(){
     undoArray.push([this.id,this.style.backgroundColor]);
-      this.style.backgroundColor = selectedColor;
-      console.log('undo array',undoArray)
-
+    this.style.backgroundColor = selectedColor;
   };
 
   var pickColor = function(){
