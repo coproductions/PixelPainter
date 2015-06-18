@@ -14,7 +14,6 @@ var pixelPainter = function(){
   var undoArray = [];
   var undoHistoryArray = [];
   var selectedColorElement;
-  // selectedColorElement.id = 'selectedColorElement';
 
   var clearButton = document.createElement('button');
   clearButton.innerHTML = 'start over';
@@ -27,7 +26,6 @@ var pixelPainter = function(){
 
 
   var eraseButton = document.createElement('button');
-  //eraseButton.innerHTML = 'erasor';
   eraseButton.id = 'erasor';
   eraseButton.appendChild(eraseImage);
   eraseButton.addEventListener('click',erase);
